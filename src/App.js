@@ -1,26 +1,28 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from "react";
+import Header from "./components/header/";
+import DealList from "./components/dealList/";
+import FilterControls from "./components/filterControls/";
+import "../node_modules/bootstrap/dist/css/bootstrap.css";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends Component {
+  render() {
+    const sample = {
+      dishName: 'Spice Bag',
+      restName: 'Imperial Garden',
+      price: '9.99',
+      picture: {thumbnail: './spicebag.jpg'}
+    };
+
+    const deals = [sample, sample, sample, sample, sample];
+
+    return (
+      <div className="jumbotron">
+        <Header noDeals={5} />
+        <FilterControls />
+        <DealList deals={deals} />
+      </div>
+    );
+  }
 }
 
 export default App;
