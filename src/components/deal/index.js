@@ -6,8 +6,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 class Deal extends Component {
   render() {
     return (
-      <div className="container">
-        <div className="card col-lg-4">
+        <div className="card col-lg-3">
           <img  className="card-img-top image-fluid rounded"
             alt={this.props.deal.dishName}
             src={this.props.deal.picture.thumbnail}
@@ -39,7 +38,6 @@ class Deal extends Component {
             </div>
           </div>
         </div>
-      </div>
     );
   }
 }

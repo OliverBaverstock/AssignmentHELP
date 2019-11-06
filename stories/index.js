@@ -5,6 +5,7 @@ import Header from '../src/components/header'
 import '../node_modules/bootstrap/dist/css/bootstrap.css';
 import FilterControls from '../src/components/filterControls/'
 import Deal from '../src/components/deal/'
+import DealList from '../src/components/dealList/'
 
 const sample = {
   dishName: 'Spice Bag',
@@ -24,3 +25,8 @@ storiesOf("Deals List App/Filter Controls", module).add("default", () => (
 storiesOf("Deals List App/Deal", module).add("default", () => ( 
   <Deal deal={sample}/>
 )); 
+
+storiesOf("Deals List App/Deal List", module).add("default", () => { 
+  const samples = [sample, sample, sample, sample, sample]
+  return <DealList deals={samples}/>
+});
