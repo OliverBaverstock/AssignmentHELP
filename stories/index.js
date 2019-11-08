@@ -13,7 +13,8 @@ const sample = {
   dishName: 'Spice Bag',
   restName: 'Imperial Garden',
   price: '9.99',
-  picture: {thumbnail: './spicebag.jpg'}
+  picture: './spicebag.jpg',
+  upvotes: 10
 }
 
 storiesOf("Deals List App/Header", module).add("default", () => (

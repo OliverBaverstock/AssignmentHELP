@@ -4,12 +4,13 @@ import "../../fontawesome";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 class Deal extends Component {
+    handleVote = () =>  this.props.upvoteHandler(this.props.deal.id);
   render() {
     return (
         <div className="card col-lg-3">
           <img  className="card-img-top image-fluid rounded"
             alt={this.props.deal.dishName}
-            src={this.props.deal.picture.thumbnail}
+            src={this.props.deal.picture}
           />
           <div className="card-body">
             <h1 className="card-title text-danger">
@@ -32,6 +33,10 @@ class Deal extends Component {
               role="group"
               aria-label="..."
             >
+                <span className="ptr" onClick={this.handleVote}>
+                <FontAwesomeIcon icon={["fas", "thumbs-up"]} size="2x" />
+                {` ${this.props.deal.upvotes}`}
+            </span>
               <button type="button" className={"btn btn-danger w-100"}>
                 {"Delete"}
               </button>

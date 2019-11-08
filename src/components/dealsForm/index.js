@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './dealsForm.css';
 
 export default class Form extends Component {
+    state = { dishName: '', restName: '', price: '', picture: ''};
     render() {
         return (
         <form  className="form bg-dark text-light">

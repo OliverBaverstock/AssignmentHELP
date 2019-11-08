@@ -13,3 +13,7 @@
     margin-left: 5%;
     margin-top: 20px;
 }
+
+.ptr {
+    cursor: pointer;
+}
