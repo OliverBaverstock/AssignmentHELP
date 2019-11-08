@@ -1,10 +1,10 @@
 import React, { Component } from "react";
 import Header from "./components/header/";
 import DealList from "./components/dealList/";
-import FilterControls from "./components/filterControls/";
+import FilterControls from "./components/navBar";
 import "../node_modules/bootstrap/dist/css/bootstrap.css";
 
-class App extends Component {
+export default class App extends Component {
   render() {
     const sample = {
       dishName: 'Spice Bag',
@@ -24,5 +24,3 @@ class App extends Component {
     );
   }
 }
-
-export default App;
