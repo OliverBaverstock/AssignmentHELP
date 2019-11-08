@@ -1,13 +1,60 @@
-import React, { Component } from "react";
+import React, { Component, Fragment } from "react";
 import "./deal.css";
 import "../../fontawesome";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import buttons from "../../config/buttonsConfig";
+import api from '../../dataStore/stubAPI'
 
 class Deal extends Component {
+    state = {
+        status: "",
+        price: this.props.deal.price,
+        phone: this.props.deal.phone,
+        previousDetails: {
+        price: this.props.deal.price,
+        phone: this.props.deal.phone,
+        }
+    };
+
+    handleEdit = () => this.setState({ status: "edit" });
+
+    handleCancel = () => {
+        let { price, phone } = this.state.previousDetails;
+        this.setState({ status: "", price, phone });
+      };
+
+      handlePriceChange = e => this.setState({ price: e.target.value });
+      handlePhoneChange = e => this.setState({ phone: e.target.value });
+
+      handleSave = e => {
+        e.preventDefault();
+        let updatedPrice = this.state.price.trim();
+        let updatedPhone = this.state.phone.trim();
+        if (!updatedPrice || !updatedPhone) {
+        return;
+        }
+        let { price, phone } = this.state;
+        this.setState({ status: "", previousDetails: { price, phone }});
+        api.update(this.state.previousDetails.phone, updatedPrice, updatedPhone);
+    };            
+
     handleVote = () =>  this.props.upvoteHandler(this.props.deal.id);
   render() {
+
+    let activeButtons = buttons.normal;
+    let leftButtonHandler = this.handleEdit;
+    let rightButtonHandler = this.handleDelete;
+    let cardColor = "bg-white";
+    if (this.state.status === "edit") {
+      cardColor = "bg-primary";
+      activeButtons = buttons.edit;
+      leftButtonHandler = this.handleSave;
+      rightButtonHandler = this.handleCancel;
+    }
+
     return (
-        <div className="card col-lg-3">
+        <div className="col-lg-3 d-flex">
+        <div className={`card  ${cardColor}`}>
           <img  className="card-img-top image-fluid rounded"
             alt={this.props.deal.dishName}
             src={this.props.deal.picture}
@@ -21,11 +68,39 @@ class Deal extends Component {
               <i class="fas fa-utensils"></i>
               <span> {this.props.deal.restName}</span>
             </h4>
-            <h3 key="price" className="text-success">
+
+            {this.state.status === "edit" ? (
+              <Fragment>
+                <p>
+                  <input
+                    type="text"
+                    className="form-control"
+                    value={this.state.price}
+                    onChange={this.handlePriceChange}
+                  />
+                </p>
+                <p>
+                  <input
+                    type="text"
+                    className="form-control"
+                    value={this.state.phone}
+                    onChange={this.handlePhoneChange}
+                  />
+                </p>
+                </Fragment>
+            ) : (
+                <Fragment>
+            <h6 key="phone" className="text-dark">
+                  <FontAwesomeIcon icon={["fas", "phone"]} />
+                  <span> {this.props.deal.phone} </span>
+                </h6>
+            <h6 key="price" className="text-success">
               <FontAwesomeIcon icon={["fas", "euro-sign"]} />
               <i class="fas fa-euro-sign"></i>
               <span> {this.props.deal.price} </span>
-            </h3>
+            </h6>
+            </Fragment>
+            )}
           </div>
           <div className="card-footer">
             <div
@@ -37,11 +112,18 @@ class Deal extends Component {
                 <FontAwesomeIcon icon={["fas", "thumbs-up"]} size="2x" />
                 {` ${this.props.deal.upvotes}`}
             </span>
-              <button type="button" className={"btn btn-danger w-100"}>
-                {"Delete"}
+            <button type="button" className={"btn btn-default w-100" +
+            activeButtons.leftButtonColor}
+            onClick={leftButtonHandler}>
+              {activeButtons.leftButtonVal}
+              </button>
+              <button type="button" className={"btn btn-danger w-100" + activeButtons.rightButtonColor}
+                onClick={rightButtonHandler}>
+                {activeButtons.rightButtonVal}
               </button>
             </div>
           </div>
+        </div>
         </div>
     );
   }

@@ -7,9 +7,17 @@ import _ from 'lodash';
 import api from './dataStore/stubAPI';
 
 export default class App extends Component {
+
+  state = { search: "", foodType: "all" };
+
   incrementUpvote = (id) => {
     api.upvote(id) ;
     this.setState({});
+};
+
+deleteDeal = (key) => {
+  api.delete(key); 
+  this.setState({});                          
 };
 
 handleChange = (type, value) => {
@@ -35,6 +43,7 @@ handleChange = (type, value) => {
         <Header noDeals={5} />
         <FilterControls />
         <DealList deals={deals} 
+            deleteHandler={this.deleteDeal}
             upvoteHandler={this.incrementUpvote} />
       </div>
     );

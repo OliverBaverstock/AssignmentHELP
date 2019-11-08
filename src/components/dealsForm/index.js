@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import './dealsForm.css';
 
 export default class Form extends Component {
-    state = { dishName: '', restName: '', price: '', picture: ''};
+    state = { dishName: '', restName: '', price: '',phone: '', picture: ''};
     render() {
         return (
         <form  className="form bg-dark text-light">
@@ -21,6 +21,11 @@ export default class Form extends Component {
                 <input type="text"
                   className="form-control"
                 placeholder="Price"></input>
+            </div>
+            <div className="form-group">
+                <input type="text"
+                  className="form-control"
+                placeholder="Phone"></input>
             </div>
             <div className="form-group">
                 <input type="file"

@@ -8,6 +8,7 @@ class StubAPI {
             dishName: 'Spice Bag',
             restName: 'Imperial Garden',
             price: '9.99',
+            phone: '021-4832432',
             picture: './spicebag.jpg',
             upvotes: 10
         },
@@ -16,6 +17,7 @@ class StubAPI {
             dishName: '4in1',
             restName: 'Imperial Garden',
             price: '4.99',
+            phone: '021-4832537',
             picture: './4in1.jpg',
             upvotes: 5
         },
@@ -24,6 +26,7 @@ class StubAPI {
             dishName: 'Munch Box',
             restName: 'Magic Wok',
             price: '19.99',
+            phone: '021-4895836',
             picture: './munchbox.jpg',
             upvotes: 6
         },
@@ -32,6 +35,7 @@ class StubAPI {
             dishName: 'Chicken Burger Meal',
             restName: 'Rockin Joes',
             price: '6.99',
+            phone: '021-4372588',
             picture: './chickburg.jpg',
             upvotes: 3
         },
@@ -40,6 +44,7 @@ class StubAPI {
             dishName: 'Hamburger',
             restName: 'McDonalds',
             price: '0.99',
+            phone: '021-2846351',
             picture: './hamburg.jpg',
             upvotes: 12
         },
@@ -48,6 +53,7 @@ class StubAPI {
             dishName: 'Chicken Wrap',
             restName: 'Lismore Takeaway',
             price: '3.99',
+            phone: '021-2633846',
             picture: './chickwrap.jpg',
             upvotes: 11
         },
@@ -56,17 +62,23 @@ class StubAPI {
             dishName: 'Extra Spice Bag',
             restName: 'Blue Jade',
             price: '9.00',
+            phone: '021-9465829',
             picture: './extraspice.jpg',
             upvotes: 14
         }
         ];
     }
 
+    delete(k) {
+        let elements = _.remove(this.deals, deal => deal.id === k);
+        return elements;
+    }
+
     getAll() {
         return this.deals;
     }
 
-    add(dishName, restName, price, picture) {
+    add(dishName, restName, price, phone, picture) {
         let id = 1;
         let last = _.last(this.deals);
         if (last) {
@@ -78,6 +90,7 @@ class StubAPI {
         dishName,
         restName,
         price,
+        phone,
         picture,
         upvotes: 0
         });
@@ -94,10 +107,25 @@ class StubAPI {
     }
 
     getDeal(id) {
-        let index = _.findIndex(this.deals, deal => deal.id === id);
+        let index = _.findIndex(this.deals, deal => deal.phone === id);
         let result = index !== -1 ? this.deals[index] : null;
         return result;
     }
+
+    update(key, price, phone) {
+        let index = _.findIndex(this.deals, deal => deal.phone === key);
+        if (index !== -1) {
+        this.deals[index].phone = phone;
+        this.deals[index].price = price;
+        return true;
+        }
+        return false;
+    }
+
+    initialize(deals) {
+        this.deals = deals;
+    }
+
 }
 
 export default new StubAPI();
