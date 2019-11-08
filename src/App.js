@@ -40,7 +40,7 @@ handleChange = (type, value) => {
 
     return (
       <div className="jumbotron">
-        <Header noDeals={5} />
+        <Header noDeals={deals.length} />
         <FilterControls />
         <DealList deals={deals} 
             deleteHandler={this.deleteDeal}

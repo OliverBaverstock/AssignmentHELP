@@ -70,7 +70,7 @@ class StubAPI {
     }
 
     delete(k) {
-        let elements = _.remove(this.deals, deal => deal.id === k);
+        let elements = _.remove(this.deals, deal => deal.phone === k);
         return elements;
     }
 

@@ -36,7 +36,14 @@ class Deal extends Component {
         let { price, phone } = this.state;
         this.setState({ status: "", previousDetails: { price, phone }});
         api.update(this.state.previousDetails.phone, updatedPrice, updatedPhone);
-    };            
+    };          
+    
+    handleDelete = () =>  this.setState({ status : 'del'} );
+
+    handleConfirm = (e) => {
+        e.preventDefault();
+        this.props.deleteHandler(this.state.phone);
+        };
 
     handleVote = () =>  this.props.upvoteHandler(this.props.deal.id);
   render() {
@@ -51,7 +58,12 @@ class Deal extends Component {
       leftButtonHandler = this.handleSave;
       rightButtonHandler = this.handleCancel;
     }
-
+    else if (this.state.status === 'del' ) {
+        cardColor = "bg-warning";
+        activeButtons = buttons.delete;
+        leftButtonHandler = this.handleCancel;
+        rightButtonHandler = this.handleConfirm;
+    }
     return (
         <div className="col-lg-3 d-flex">
         <div className={`card  ${cardColor}`}>
