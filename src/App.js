@@ -8,7 +8,7 @@ import api from './dataStore/stubAPI';
 
 export default class App extends Component {
 
-  state = { search: "", foodType: "all" };
+  state = { search: ""};
 
   incrementUpvote = (id) => {
     api.upvote(id) ;
@@ -25,24 +25,21 @@ handleChange = (type, value) => {
   ? this.setState({ search: value })
   : this.setState({ foodType: value });
 };
-  render() {
-    let deals = _.sortBy(api.getAll(), post => -post.upvotes);
 
-    let filteredDeals = deals.filter(c => {
-      const name = `${c.dishname}`;
+  render() {
+    
+    let deals = api.getAll();
+    let filteredDeals = deals.filter(deals => {
+      const name = `${deals.dishName}`;
       return name.toLowerCase().search(this.state.search.toLowerCase()) !== -1;
       });
-      filteredDeals =
-      this.state.foodType === "all"
-          ? filteredDeals
-          : filteredDeals.filter(c => c.foodType === this.state.foodType);
-      let sortedDeals = _.sortBy(filteredDeals, c => c.dishName);
+      let sortedDeals = _.sortBy(filteredDeals, deals => deals.dishName);
 
     return (
       <div className="jumbotron">
-        <Header noDeals={deals.length} />
-        <FilterControls />
-        <DealList deals={deals} 
+        <Header noDeals={sortedDeals.length} />
+        <FilterControls onUserInput={this.handleChange}/>
+        <DealList deals={sortedDeals} 
             deleteHandler={this.deleteDeal}
             upvoteHandler={this.incrementUpvote} />
       </div>
