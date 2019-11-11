@@ -1,19 +1,16 @@
 import React, { Component } from "react";
-import "./filterControls.css"
+import "./filterControls.css";
 
 export default class FilterControls extends Component {
 
 
 
-    handleChange = (e, type, value) => {
+    handleChange = (e, value) => {
         e.preventDefault();
-        this.props.onUserInput(type, value);
+        this.props.onUserInput(value);
     };
     handleTextChange = e => {
         this.handleChange(e, "name", e.target.value);
-    };
-    handleGenderChange = e => {
-        this.handleChange(e, "foodType", e.target.value);
     };
 
   render() {
