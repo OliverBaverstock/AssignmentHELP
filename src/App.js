@@ -31,12 +31,12 @@ handleChange = (type, value) => {
     console.log("hello world")
     
     let deals = api.getAll();
-    let filteredDeals = deals.filter(deal => {
-      const name = `${deal.dishName}`;
-      console.log(deal)
-      return name.search(this.state.search.toLowerCase()) !== -1;
+    let filteredDeals = deals.filter(deals => {
+      const name = `${deals.dishName}`;
+      console.log(deals)
+      return name.toLowerCase().search(this.state.search.toLowerCase()) !== -1;
       });
-      let sortedDeals = _.sortBy(filteredDeals, deal => deal.dishName);
+      let sortedDeals = _.sortBy(filteredDeals, deals => deals.dishName);
 
     return (
       <div className="jumbotron">
