@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './dealsForm.css';
+import api from '../../dataStore/stubAPI';
 
 export default class Form extends Component {
     state = { dishName: '', restName: '', price: '',phone: '', picture: ''};
@@ -12,7 +13,7 @@ export default class Form extends Component {
 
     handleSubmit = (e) => {
         e.preventDefault();
-        this.props.handleAdd( this.state.dishName, this.state.restName, this.state.price, this.state.phone, this.state.picture)
+        api.add( this.state.dishName, this.state.restName, this.state.price, this.state.phone, this.state.picture)
         this.setState({ dishName: '', restName:'', price: '', phone:'', picture: ''})
     }
 
