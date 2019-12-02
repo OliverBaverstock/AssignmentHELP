@@ -21,6 +21,7 @@ deleteDeal = (key) => {
 };
 
 handleChange = (type, value) => {
+  console.log('Hello')
   type === "name"
   ? this.setState({ search: value })
   : this.setState({ foodType: value });
@@ -34,7 +35,7 @@ handleChange = (type, value) => {
     let filteredDeals = deals.filter(deal => {
       const name = `${deal.dishName}`;
       console.log(deal)
-      return name.search(this.state.search.toLowerCase()) !== -1;
+      return name.toLowerCase().search(this.state.search.toLowerCase()) !== -1;
       });
       let sortedDeals = _.sortBy(filteredDeals, deal => deal.dishName);
 

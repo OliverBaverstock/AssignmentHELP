@@ -10,7 +10,7 @@ class Header extends Component {
             <div className="col-md-6 offset-4">
               <div className="page-header">
                 <h1>
-                <Link to={`/components/DealsForm` }>Add Deal</Link>
+                <Link to={`/dealsForm` }>Add Deal</Link>
                    -   
                   <a href='/'> Deal List <span className="badge badge-pill badge-success">{this.props.noDeals}</span></a>
                 </h1>

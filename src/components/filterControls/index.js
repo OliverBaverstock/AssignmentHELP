@@ -5,7 +5,7 @@ export default class FilterControls extends Component {
 
 
 
-    handleChange = (e, value) => {
+    handleChange = (e,type, value) => {
         e.preventDefault();
         this.props.onUserInput(value);
     };
