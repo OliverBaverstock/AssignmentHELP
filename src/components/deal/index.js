@@ -4,6 +4,7 @@ import "../../fontawesome";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import buttons from "../../config/buttonsConfig";
 import api from '../../dataStore/stubAPI';
+import { Link } from 'react-router-dom';
 
 class Deal extends Component {
     state = {
@@ -67,10 +68,12 @@ class Deal extends Component {
     return (
         <div className="col-lg-3 d-flex">
         <div className={`card  ${cardColor}`}>
+        <Link to={`/deals/${this.props.deal.id}` }>
           <img  className="card-img-top image-fluid rounded"
             alt={this.props.deal.dishName}
             src={this.props.deal.picture}
           />
+          </Link>
           <div className="card-body">
             <h1 className="card-title text-danger">
               {`${this.props.deal.dishName}`}

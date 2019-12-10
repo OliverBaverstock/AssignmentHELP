@@ -7,6 +7,9 @@ import Deal from '../src/components/deal/'
 import DealList from '../src/components/dealList/'
 import DealsForm from '../src/components/dealsForm/';
 import FilterControls from '../src/components/filterControls/'
+import ReviewForm from "../src/components/reviewForm";
+import Review from "../src/components/review";
+import ReviewList from "../src/components/reviewList";
 
 const sample = {
   dishName: 'Spice Bag',
@@ -16,6 +19,13 @@ const sample = {
   picture: './spicebag.jpg',
   upvotes: 10
 }
+
+const review = {
+  id: 1,
+  author: "Joe Bloggs",
+  review: "I agree with .....",
+  upvotes: 10
+};
 
 storiesOf("Deals List App/Header", module).add("default", () => (
   <Header  noDeals={10} />
@@ -35,3 +45,23 @@ storiesOf("Deals List App/Deal", module).add("default", () => (
 storiesOf("Deals List App/Filter Controls", module).add("default", () => (
   <FilterControls onUserInput={action('Search criteria changes') }/>
 ));
+
+storiesOf("Deals List App/Review page/Review Form", module).add("default", () => (
+  <ReviewForm post={sample} addReviewHandler={action("review added")} />
+));
+
+storiesOf("Deals List App/Review page/Review", module).add("default", () => (
+  <Review upvoteHandler={action("upvoted")} review={review} />
+));
+
+storiesOf("Deals List App/Review page/Review list", module).add("default", () => {
+  const defaultReviews = [
+    review,
+    { ...review, author: "Jane Smith", upvotes: 3, id: 2 },
+    { ...review, comment: "On the other hand", id: 3 },
+    { ...review, author: "Jill Dwyer", upvotes: 5, id: 4 }
+  ];
+  return (
+    <ReviewList upvoteHandler={action("upvoted")} comments={defaultReviews} />
+  );
+});

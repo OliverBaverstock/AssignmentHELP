@@ -10,6 +10,7 @@ class StubAPI {
             price: '9.99',
             phone: '021-4832432',
             picture: './spicebag.jpg',
+            reviews: [],
             upvotes: 10
         },
         {
@@ -19,6 +20,7 @@ class StubAPI {
             price: '4.99',
             phone: '021-4832537',
             picture: './4in1.jpg',
+            reviews: [],
             upvotes: 5
         },
         {
@@ -28,6 +30,7 @@ class StubAPI {
             price: '19.99',
             phone: '021-4895836',
             picture: './munchbox.jpg',
+            reviews: [],
             upvotes: 6
         },
         {
@@ -37,6 +40,7 @@ class StubAPI {
             price: '6.99',
             phone: '021-4372588',
             picture: './chickburg.jpg',
+            reviews: [],
             upvotes: 3
         },
         {
@@ -46,6 +50,7 @@ class StubAPI {
             price: '0.99',
             phone: '021-2846351',
             picture: './hamburg.jpg',
+            reviews: [],
             upvotes: 12
         },
         {
@@ -55,6 +60,7 @@ class StubAPI {
             price: '3.99',
             phone: '021-2633846',
             picture: './chickwrap.jpg',
+            reviews: [],
             upvotes: 11
         },
         {
@@ -64,6 +70,7 @@ class StubAPI {
             price: '9.00',
             phone: '021-9465829',
             picture: './extraspice.jpg',
+            reviews: [],
             upvotes: 14
         }
         ];
@@ -92,6 +99,7 @@ class StubAPI {
         price,
         phone,
         picture,
+        reviews: [],
         upvotes: 0
         });
         return newLen > len;
@@ -112,6 +120,17 @@ class StubAPI {
         return result;
     }
 
+    find(id) {
+        let index = _.findIndex(
+        this.deals,
+        deal => `${deal.phone}${deal.cell}` === id
+        );
+        if (index !== -1) {
+        return this.deals[index];
+        }
+        return null;
+    }
+
     update(key, price, phone) {
         let index = _.findIndex(this.deals, deal => deal.phone === key);
         if (index !== -1) {
@@ -120,6 +139,24 @@ class StubAPI {
         return true;
         }
         return false;
+    }
+
+    addReview(dealId, c, n) {
+        let deal = this.getDeal(dealId);
+        let id = 1;
+        let last = _.last(deal.reviews);
+        if (last) {
+        id = last.id + 1;
+        }
+        deal.reviews.push({ id: id, review: c, author: n, upvotes: 0 });
+    }
+
+    upvoteReview(dealId, reviewId) {
+        let deal = this.getDeal(dealId);
+        let index = _.findIndex(deal.reviews, c => c.id === reviewId);
+        if (index !== -1) {
+        deal.reviews[index].upvotes += 1;
+        }
     }
 
     initialize(deals) {
