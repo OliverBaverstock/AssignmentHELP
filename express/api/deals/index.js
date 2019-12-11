@@ -1,43 +1,51 @@
 import express from 'express';
-import stubAPI from './stubAPI';
+import Deal from './dealsModel';
+import asyncHandler from 'express-async-handler';
 
-const router = express.Router();
+const router = express.Router();// eslint-disable-line
 
-// get all deals
-router.get('/', (req, res) => {
-  const deals = stubAPI.getAll();
-  res.send({deals: deals});
-});
-
+router.get('/', asyncHandler(async (req, res) => {
+  const deals = await Deal.find();
+  return res.send(deals);
+}));
 
 // Add a deal
-router.post('/', (req, res) => {
+router.post('/', asyncHandler(async (req, res) => {
     const newDeal = req.body;
-
-    if (newDeal && stubAPI.add(newDeal.dishName, newDeal.restName, newDeal.price, newDeal.phone, newDeal.picture)) {
-         return res.status(201).send({message: 'Deal Created'});
-    }
-    return res.status(400).send({message: 'Unable to find Deal in request.'});
-});
-
-// get a deal
-router.get('/:id', (req, res) => {
-    const id = req.params.id;
-    const post = stubAPI.getDeal(id);
-
-       if (deal) {
-               return res.status(200).send(deal);
-              }
-              return res.status(404).send({message: `Unable to find Deal ${id}`});
-});
+    if (newDeal) {
+          const deal = await Deal.create(newDeal);
+          return res.status(201).send({deal});
+      } else {
+         return handleError(res, err);
+      }
+}));
 
 // upvote a deal
-router.post('/:id/upvote', (req, res) => {
+router.post('/:id/upvotes', asyncHandler(async (req, res) => {
+  const id = req.params.id;
+  const deal = await Deal.findById(id);
+  deal.upvotes++;
+  await deal.save();
+  return res.status(201).send({deal});
+}));
+
+// get deal
+router.get('/:id', asyncHandler(async (req, res) => {
     const id = req.params.id;
-           if (stubAPI.upvote(id)) {
-                return res.status(200).send({message: `Post ${id} Upvoted`});
-           }
-           return res.status(404).send({message: `Unable to find Post ${id}`});
-});
+    const deal = await Deal.findById(id);
+    return res.send({deal});
+}));
+
+
+
+/**
+ * Handle general errors.
+ * @param {object} res The response object
+ * @param {object} err The error object.
+ * @return {object} The response object
+ */
+function handleError(res, err) {
+  return res.status(500).send(err);
+};
 
 export default router;
