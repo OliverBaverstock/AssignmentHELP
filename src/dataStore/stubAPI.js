@@ -115,7 +115,7 @@ class StubAPI {
     }
 
     getDeal(id) {
-        let index = _.findIndex(this.deals, deal => deal.phone === id);
+        let index = _.findIndex(this.deals, deal => deal.id === id);
         let result = index !== -1 ? this.deals[index] : null;
         return result;
     }

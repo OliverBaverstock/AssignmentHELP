@@ -23,7 +23,7 @@ class ReviewPage extends Component {
     render() {
         let dealID = this.getId()
         let deal = api.getDeal(dealID);
-        let line = deal.dishNamw?
+        let line = deal.dishName?
             <a href="/">{deal.dishName} </a> :
             <span>{deal.dishName} </span> ;
         let reviews = _.sortBy(deal.reviews,

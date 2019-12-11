@@ -4,21 +4,32 @@ import DealList from "./components/dealList/";
 import FilterControls from './components/filterControls/';
 import "../node_modules/bootstrap/dist/css/bootstrap.css";
 import _ from 'lodash';
-import api from './dataStore/stubAPI';
+import * as api from './api';
 
 export default class App extends Component {
 
-  state = { search: ""};
+  state = { search: "", deals: [{}]};
 
-  incrementUpvote = (id) => {
-    api.upvote(id) ;
-    this.setState({});
+  componentDidMount() {
+    api.getAll().then(resp => {
+        this.setState({
+            deals: resp.deals
+        });
+    }).catch(console.error);
 };
 
-deleteDeal = (key) => {
+incrementUpvote = (id) => {
+  api.upvote(id).then(resp=> {
+         var upvotedDeal = _.find(this.state.deals, deal=>deal.id === id);
+         upvotedDeal.upvotes++;  
+         this.setState({})
+       }) ;
+};
+
+/* deleteDeal = (key) => {
   api.delete(key); 
   this.setState({});                          
-};
+}; */
 
 handleChange = (type, value) => {
   type === "name"
@@ -26,11 +37,14 @@ handleChange = (type, value) => {
   : this.setState({ foodType: value });
 };
 
+
   render() {
 
     console.log("hello world")
     
-    let deals = api.getAll();
+    const deals = _.sortBy(this.state.deals, deal =>
+      deal.upvotes);
+
     let filteredDeals = deals.filter(deals => {
       const name = `${deals.dishName}`;
       console.log(deals)
