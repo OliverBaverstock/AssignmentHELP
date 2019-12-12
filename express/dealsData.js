@@ -8,7 +8,6 @@ const deals = [
         price: '9.99',
         phone: '021-4832432',
         picture: 'https://source.unsplash.com/random/?fastfood',
-        username: 'jbloggs',
         reviews: [],
         upvotes: 10
     },
@@ -19,7 +18,6 @@ const deals = [
         price: '4.99',
         phone: '021-4832537',
         picture: 'https://source.unsplash.com/random/?fastfood',
-        username: 'jbloggs',
         reviews: [],
         upvotes: 5
     },
@@ -30,7 +28,6 @@ const deals = [
         price: '19.99',
         phone: '021-4895836',
         picture: 'https://source.unsplash.com/random/?fastfood',
-        username: 'jbloggs',
         reviews: [],
         upvotes: 6
     },
@@ -41,7 +38,6 @@ const deals = [
         price: '6.99',
         phone: '021-4372588',
         picture: 'https://source.unsplash.com/random/?fastfood',
-        username: 'jbloggs',
         reviews: [],
         upvotes: 3
     },
@@ -52,7 +48,6 @@ const deals = [
         price: '0.99',
         phone: '021-2846351',
         picture: 'https://source.unsplash.com/random/?fastfood',
-        username: 'jbloggs',
         reviews: [],
         upvotes: 12
     },
@@ -63,7 +58,6 @@ const deals = [
         price: '3.99',
         phone: '021-2633846',
         picture: 'https://source.unsplash.com/random/?fastfood',
-        username: 'jbloggs',
         reviews: [],
         upvotes: 11
     },
@@ -74,7 +68,6 @@ const deals = [
         price: '9.00',
         phone: '021-9465829',
         picture: 'https://source.unsplash.com/random/?fastfood',
-        username: 'jbloggs',
         reviews: [],
         upvotes: 14
     }
