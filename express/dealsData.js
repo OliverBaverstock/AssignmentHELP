@@ -7,7 +7,7 @@ const deals = [
         restName: 'Imperial Garden',
         price: '9.99',
         phone: '021-4832432',
-        picture: 'https://source.unsplash.com/random/?fastfood',
+        picture: 'https://source.unsplash.com/random/?chinese_food',
         reviews: [],
         upvotes: 10
     },
@@ -17,7 +17,7 @@ const deals = [
         restName: 'Imperial Garden',
         price: '4.99',
         phone: '021-4832537',
-        picture: 'https://source.unsplash.com/random/?fastfood',
+        picture: 'https://source.unsplash.com/random/?chinese_takeaway1',
         reviews: [],
         upvotes: 5
     },
@@ -27,7 +27,7 @@ const deals = [
         restName: 'Magic Wok',
         price: '19.99',
         phone: '021-4895836',
-        picture: 'https://source.unsplash.com/random/?fastfood',
+        picture: 'https://source.unsplash.com/random/?indian_food',
         reviews: [],
         upvotes: 6
     },
@@ -37,7 +37,7 @@ const deals = [
         restName: 'Rockin Joes',
         price: '6.99',
         phone: '021-4372588',
-        picture: 'https://source.unsplash.com/random/?fastfood',
+        picture: 'https://source.unsplash.com/random/?chicken_burger',
         reviews: [],
         upvotes: 3
     },
@@ -47,7 +47,7 @@ const deals = [
         restName: 'McDonalds',
         price: '0.99',
         phone: '021-2846351',
-        picture: 'https://source.unsplash.com/random/?fastfood',
+        picture: 'https://source.unsplash.com/random/?hamburger',
         reviews: [],
         upvotes: 12
     },
@@ -57,7 +57,7 @@ const deals = [
         restName: 'Lismore Takeaway',
         price: '3.99',
         phone: '021-2633846',
-        picture: 'https://source.unsplash.com/random/?fastfood',
+        picture: 'https://source.unsplash.com/random/?chicken_wrap',
         reviews: [],
         upvotes: 11
     },
@@ -67,7 +67,7 @@ const deals = [
         restName: 'Blue Jade',
         price: '9.00',
         phone: '021-9465829',
-        picture: 'https://source.unsplash.com/random/?fastfood',
+        picture: 'https://source.unsplash.com/random/?asian_food',
         reviews: [],
         upvotes: 14
     }

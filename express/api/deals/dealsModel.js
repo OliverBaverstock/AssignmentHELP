@@ -11,10 +11,9 @@ const ReviewSchema = new Schema({
  const DealSchema = new Schema({
    dishName: {type: String, required: true},
    restName: {type: String, required: true},
-   price: {type: Number, required: true},
+   price: {type: String, required: true},
    phone: {type: Number, required: true},
    picture: {type: String, optional: true},
-   username: {type: String, required: true},
    reviews: [ReviewSchema],
    upvotes: {type: Number, min: 0, max: 100, default: 0},
  });
