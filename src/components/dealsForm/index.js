@@ -17,7 +17,6 @@ export default class Form extends Component {
     api.add(this.state.dishName, this.state.restName, this.state.price, this.state.phone, this.state.picture)
       .then(resp => {
         const newDeal = { "id": resp.id, "dishName": this.state.dishName, "restName": this.state.restName, "price": this.state.price, "phone": this.state.phone, "picture": this.state.picture, "upvotes": 0, "comments": [] };
-        this.setState({ deals: this.state.deals.concat([newDeal]) });
       })
 
     this.setState({ dishName: '', restName: '', price: '', phone: '', picture: '' })

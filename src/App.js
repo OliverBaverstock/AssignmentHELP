@@ -12,8 +12,9 @@ export default class App extends Component {
 
   componentDidMount() {
     api.getAll().then(resp => {
+      console.log(resp)
         this.setState({
-            deals: resp.deals
+            deals: resp
         });
     }).catch(console.error);
 };
@@ -26,10 +27,10 @@ incrementUpvote = (id) => {
        }) ;
 };
 
-/* deleteDeal = (key) => {
-  api.delete(key); 
+ deleteDeal = (key) => {
+  api.deleteDeal(key); 
   this.setState({});                          
-}; */
+}; 
 
 handleChange = (type, value) => {
   type === "name"

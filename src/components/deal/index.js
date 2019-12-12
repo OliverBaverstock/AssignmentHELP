@@ -3,7 +3,8 @@ import "./deal.css";
 import "../../fontawesome";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import buttons from "../../config/buttonsConfig";
-import api from '../../dataStore/stubAPI';
+
+import * as api from '../../api';
 import { Link } from 'react-router-dom';
 
 class Deal extends Component {
