@@ -44,7 +44,7 @@ class Deal extends Component {
 
     handleConfirm = (e) => {
         e.preventDefault();
-        this.props.deleteHandler(this.state.phone);
+        this.props.deleteHandler(this.state.id);
         };
 
     handleVote = () =>  this.props.upvoteHandler(this.props.deal.id);

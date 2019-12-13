@@ -1,36 +1,57 @@
 import React, { Component } from "react";
+import { Redirect } from 'react-router-dom';
 import Header from "./components/header/";
 import DealList from "./components/dealList/";
 import FilterControls from './components/filterControls/';
 import "../node_modules/bootstrap/dist/css/bootstrap.css";
-import _ from 'lodash';
 import * as api from './api';
+import _ from 'lodash';
+
+
 
 export default class App extends Component {
+  constructor(props){
+    super(props);
+    this.state = { search: "", deals: [{}], login:false};
+  }
 
-  state = { search: "", deals: [{}]};
-
-  componentDidMount() {
-    api.getAll().then(resp => {
-      console.log(resp)
+async componentDidMount () {
+  this._isMounted=true
+  try{
+        const resp = await api.getAll();
+        if (this._isMounted){
         this.setState({
-            deals: resp
-        });
-    }).catch(console.error);
+                 deals: resp,
+                 login: false,
+               });
+              }
+
+     } catch (e){
+       if (this._isMounted) this.setState({
+                login: true
+              });
+     }
 };
 
-incrementUpvote = (id) => {
-  api.upvote(id).then(resp=> {
+incrementUpvote = async (id) => {
+  try{
+  await api.upvote(id).then
          var upvotedDeal = _.find(this.state.deals, deal=>deal.id === id);
          upvotedDeal.upvotes++;  
-         this.setState({})
-       }) ;
+         this.setState({})} catch(e){
+           alert(`failed to upvote post ${id}: ${e}`);
+      }
 };
 
- deleteDeal = (key) => {
-  api.deleteDeal(key); 
-  this.setState({});                          
+
+ deleteDeal = (id) => {
+  api.deleteDeal(id).then(resp =>{
+    const deal = {"id":resp.id};
+    this.setState({deals: this.state.deals.splice([deal])});
+  })                       
 }; 
+
+
 
 handleChange = (type, value) => {
   type === "name"
@@ -46,6 +67,8 @@ handleChange = (type, value) => {
     const deals = _.sortBy(this.state.deals, deal =>
       deal.upvotes);
 
+      const { login } = this.state;
+
     let filteredDeals = deals.filter(deals => {
       const name = `${deals.dishName}`;
       console.log(deals)
@@ -60,6 +83,7 @@ handleChange = (type, value) => {
         <DealList deals={sortedDeals} 
             deleteHandler={this.deleteDeal}
             upvoteHandler={this.incrementUpvote} />
+        {login && (<Redirect to='/login'/>)}
       </div>
     );
   }

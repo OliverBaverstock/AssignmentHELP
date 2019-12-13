@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import './dealsForm.css';
 import * as api from '../../api';
+import {Link} from 'react-router-dom';
+import "../../fontawesome";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 export default class Form extends Component {
   state = { dishName: '', restName: '', price: '', phone: '', picture: '' };
@@ -14,17 +17,22 @@ export default class Form extends Component {
   handleSubmit = (e) => {
     e.preventDefault();
 
-    api.add(this.state.dishName, this.state.restName, this.state.price, this.state.phone, this.state.picture)
-      .then(resp => {
-        const newDeal = { "id": resp.id, "dishName": this.state.dishName, "restName": this.state.restName, "price": this.state.price, "phone": this.state.phone, "picture": this.state.picture, "upvotes": 0, "comments": [] };
-      })
+    const picture = "https://source.unsplash.com/random/?fastfood";
+
+    api.add(this.state.dishName, this.state.restName, this.state.price, this.state.phone, picture)
+
 
     this.setState({ dishName: '', restName: '', price: '', phone: '', picture: '' })
 
   }
 
+  
+
   render() {
     return (
+      <div><Link to="/"><FontAwesomeIcon icon={["fas", "arrow-circle-left"]}/>
+      <span>Home</span>
+      </Link>
       <form className="form bg-dark text-light">
         <h3>Add a deal</h3>
         <div className="form-group">
@@ -71,6 +79,7 @@ export default class Form extends Component {
           className="btn btn-primary"
           onClick={this.handleSubmit}>Add</button>
       </form>
+      </div>
     );
   }
 }
