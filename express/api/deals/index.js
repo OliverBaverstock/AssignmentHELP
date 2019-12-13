@@ -12,6 +12,7 @@ router.get('/', asyncHandler(async (req, res) => {
 // Add a deal
 router.post('/', asyncHandler(async (req, res) => {
     const newDeal = req.body;
+    newDeal.user = req.user._id || 'anonymous';
     if (newDeal) {
           const deal = await Deal.create(newDeal);
           return res.status(201).send({deal});
@@ -19,6 +20,8 @@ router.post('/', asyncHandler(async (req, res) => {
          return handleError(res, err);
       }
 }));
+
+
 
 // upvote a deal
 router.post('/:id/upvotes', asyncHandler(async (req, res) => {

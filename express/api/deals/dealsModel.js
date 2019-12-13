@@ -2,12 +2,14 @@ import mongoose from 'mongoose';
 const Schema = mongoose.Schema;
 
 const ReviewSchema = new Schema({
+  user: {type: Schema.Types.ObjectId,ref:'User', required: true},
   body: {type: String, required: true},
   author: {type: String, required: true},
   upvotes: {type: Number, default: 0},
   });
 
  const DealSchema = new Schema({
+   user: {type: Schema.Types.ObjectId,ref:'User', required: true},
    dishName: {type: String, required: true},
    restName: {type: String, required: true},
    price: {type: Number, required: true},
